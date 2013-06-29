@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 
-"""
-Link sender
-"""
-
 import os
 import sys
 import boto
