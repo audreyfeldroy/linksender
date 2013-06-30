@@ -3,10 +3,7 @@
 import os
 import sys
 import boto
-
-def percent_cb(complete, total):
-    sys.stdout.write('.')
-    sys.stdout.flush()
+from boto.s3.key import Key
 
 # Setup
 conn = boto.connect_s3()
@@ -15,10 +12,12 @@ bucket = conn.get_bucket(bucket_name)
 
 # TODO: write command line arg as link
 
-# Create index.html
-f = open('index.html', 'w')
-f.write('<a href="http://pydanny.com">link</a>')
+# Upload index.html to the bucket as public file
 
-# TODO: Upload index.html to the bucket as public file
+k = Key(bucket)
+k.key = 'index.html'
+k.set_metadata("Content-Type", 'text/html')
+k.set_contents_from_string('<a href="http://pydanny.com">link</a>')
+k.make_public()
 
 # TODO: Open browser to the URL
