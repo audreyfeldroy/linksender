@@ -15,8 +15,7 @@ bucket = conn.get_bucket(bucket_name)
 
 # Get command line URL argument
 parser = argparse.ArgumentParser(description='Turn a URL into a static HTML link, hosted by your favorite Amazon S3 bucket.')
-parser.add_argument('url', metavar='U',
-                   help='URL to be linked to')
+parser.add_argument('url', help='URL to be linked to')
 args = parser.parse_args()
 
 # Put together HTML page content as string
