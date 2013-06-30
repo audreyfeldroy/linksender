@@ -2,7 +2,6 @@
 
 import argparse
 import os
-import sys
 import webbrowser
 
 import boto
@@ -14,7 +13,8 @@ bucket_name = os.environ.get('LINKSENDER_BUCKET')
 bucket = conn.get_bucket(bucket_name)
 
 # Get command line URL argument
-parser = argparse.ArgumentParser(description='Turn a URL into a static HTML link, hosted by your favorite Amazon S3 bucket.')
+parser = argparse.ArgumentParser(description='Turn a URL into a static HTML \
+    link, hosted by your favorite Amazon S3 bucket.')
 parser.add_argument('url', help='URL to be linked to')
 args = parser.parse_args()
 
@@ -29,5 +29,5 @@ k.set_contents_from_string(content)
 k.make_public()
 
 # Open browser to the URL
-browser_url = 'http://{0}.s3-website-us-east-1.amazonaws.com'.format(bucket_name)
-webbrowser.open_new(browser_url)
+s3_url = 'http://{0}.s3-website-us-east-1.amazonaws.com'.format(bucket_name)
+webbrowser.open_new(s3_url)
