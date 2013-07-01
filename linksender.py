@@ -18,6 +18,13 @@ parser = argparse.ArgumentParser(description='Turn a URL into a static HTML \
 parser.add_argument('url', help='URL to be linked to')
 args = parser.parse_args()
 
+# TODO: use urllib or similar to avoid appending ? if it's already part of
+# the entered URL.
+# Get optional query component to append
+query_string = os.environ.get('LINKSENDER_EXTRA_QUERY_STRING')
+if query_string:
+    args.url += "?" + query_string
+
 # Put together HTML page content as string
 content = '<a href="{0}">{0}</a>'.format(args.url)
 
